@@ -13,8 +13,7 @@
                         <form @submit.prevent="login">
                             <div class="form-group">
                                 <label>ID Card Number</label>
-                                <input type="number" v-model="user.id_card_number" class="form-control"
-                                    placeholder="Email Address">
+                                <input type="number" v-model="user.id_card_number" class="form-control" placeholder="Email Address">
                             </div>
                             <div v-if="validation.id_card_number" class="mt-2 alert alert-danger">
                                 {{ validation.id_card_number[0] }}
@@ -22,8 +21,7 @@
 
                             <div class="form-group mb-2">
                                 <label>Password</label>
-                                <input type="password" v-model="user.password" class="form-control"
-                                    placeholder="Password">
+                                <input type="password" v-model="user.password" class="form-control" placeholder="Password">
                             </div>
                             <div v-if="validation.password" class="mt-2 alert alert-danger">
                                 {{ validation.password[0] }}
