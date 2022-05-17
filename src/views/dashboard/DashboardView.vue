@@ -66,33 +66,35 @@
                                         </ul>
                                         <ul class="list-group" v-else-if="user.consultation_status > 0">
                                             <li class="list-group-item">
-                                                <table class="table table-borderless table-sm m-0">
-                                                    <tr>
-                                                        <td>Status</td>
-                                                        <td>:</td>
-                                                        <td>{{ consultations.status}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Disease History</td>
-                                                        <td>:</td>
-                                                        <td>{{ consultations.disease_history}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Current Symptoms</td>
-                                                        <td>:</td>
-                                                        <td>{{ consultations.current_symptoms}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Doctor Name</td>
-                                                        <td>:</td>
-                                                        <td> {{ consultations.doctor}} </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Doctor Notes</td>
-                                                        <td>:</td>
-                                                        <td> {{ consultations.doctor_notes}} </td>
-                                                    </tr>
-                                                </table>
+                                                <div class="table-responsive">
+                                                    <table class="table table-borderless table-sm m-0">
+                                                        <tr>
+                                                            <td>Status</td>
+                                                            <td>:</td>
+                                                            <td>{{ consultations.status}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Disease History</td>
+                                                            <td>:</td>
+                                                            <td>{{ consultations.disease_history}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Current Symptoms</td>
+                                                            <td>:</td>
+                                                            <td>{{ consultations.current_symptoms}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Doctor Name</td>
+                                                            <td>:</td>
+                                                            <td> {{ consultations.doctor}} </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Doctor Notes</td>
+                                                            <td>:</td>
+                                                            <td> {{ consultations.doctor_notes}} </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -100,14 +102,113 @@
                             </div>
                         </div>
 
-                        <div class="row my-4">
-                            <div class="col-md-5">
+                        <div class="row my-4" >
+
+                            <div class="col-md-5" v-if="consultations.status == 'Pending' || consultations.status == 'Rejected'">
                                 <div class="card">
-                                    <div class="card-header bg-secondary text-light">
-                                        My Vaccinations
+                                    <div class="card-header">
+                                        First Vaccination
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group">
+                                            <li class="list-group item">Wait for consultation ACcepted by Doctor</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- <p>{{ consultations.status }}</p> -->
+
+                             <!-- <div class="col-md-5" v-if="consultations.status == 'Accepted'">
+                                <div class="card">
+                                    <div class="card-header bg-secondary text-light">
+                                        First Vaccinations
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless">
+                                                <tr>
+                                                    <td>Status</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[0].status }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[0].vaccination_date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Spot</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[0].vaccinespot.name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vaccine</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[0].vaccinespot.available_vaccines }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vaccinator</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[0].vaccinator }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            
+
+                            
+
+                            <!-- second vaccine -->
+                            <div class="col-md-5" v-if="user.first_vaccination == true">
+                                <div class="card">
+                                    <div class="card-header bg-secondary text-light">
+                                        Second Vaccinations
+                                    </div>
+                                    <div class="card-body">
+
+                                        <ul class="list-group" v-if="user.second_vaccination == 0">
+                                            <li class="list-group-item">
+                                                <a href="">+ Register Vaccination</a>
+                                            </li>
+                                        </ul>
+
+                                        <div class="table-responsive" v-else-if="user.second_vaccination == 1">
+                                            <table class="table table-borderless">
+                                                <tr>
+                                                    <td>Status</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[1].status }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[1].vaccination_date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Spot</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[1].vaccinespot.name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vaccine</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[1].vaccinespot.available_vaccines }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vaccinator</td>
+                                                    <td>:</td>
+                                                    <td>{{ vaccinations[1].vaccinator }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
                         </div>
 
                     </div>
@@ -143,6 +244,8 @@ import axios from 'axios'
             }) 
 
             const consultations = ref('')
+
+            const vaccinations = ref('')
             
             //mounted properti
             onMounted(() =>{
@@ -167,7 +270,7 @@ import axios from 'axios'
                     console.log(error.response.data)
                 })
 
-                console.log(id_user)
+                // console.log(id_user)
 
                 axios.get(`http://localhost:8000/api/v1/consultation/${id_user}`)
                 .then(response => {
@@ -176,6 +279,17 @@ import axios from 'axios'
 
                 })
                 .catch(error => {
+                    console.log(error.response.data)
+                })
+
+
+                axios.get(`http://localhost:8000/api/v1/vaccination/${id_user}`).
+                then(response => {
+
+                    console.log(response.data)
+                    vaccinations.value = response.data
+
+                }).catch(error=>{
                     console.log(error.response.data)
                 })
 
@@ -241,7 +355,8 @@ import axios from 'axios'
                 logout ,     // <-- method logout
                 consultations,
                 addConsul,
-                addConsultation
+                addConsultation,
+                vaccinations
             }
 
         }
