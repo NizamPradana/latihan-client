@@ -117,9 +117,9 @@
                                 </div>
                             </div>
 
-                            <!-- <p>{{ consultations.status }}</p> -->
 
-                             <!-- <div class="col-md-5" v-if="consultations.status == 'Accepted'">
+                            
+                             <div class="col-md-5" v-else >
                                 <div class="card">
                                     <div class="card-header bg-secondary text-light">
                                         First Vaccinations
@@ -130,40 +130,40 @@
                                                 <tr>
                                                     <td>Status</td>
                                                     <td>:</td>
-                                                    <td>{{ vaccinations[0].status }}</td>
+                                                    <td>{{ first_vaccination.name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Date</td>
                                                     <td>:</td>
-                                                    <td>{{ vaccinations[0].vaccination_date }}</td>
+                                                    <td>{{ first_vaccination.vaccination_date }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Spot</td>
                                                     <td>:</td>
-                                                    <td>{{ vaccinations[0].vaccinespot.name }}</td>
+                                                    <!-- <td>{{ first_vaccination.vaccinespot.name }}</td> -->
                                                 </tr>
                                                 <tr>
                                                     <td>Vaccine</td>
                                                     <td>:</td>
-                                                    <td>{{ vaccinations[0].vaccinespot.available_vaccines }}</td>
+                                                    <!-- <td>{{ first_vaccination.vaccinespot.available_vaccines }}</td> -->
                                                 </tr>
                                                 <tr>
                                                     <td>Vaccinator</td>
                                                     <td>:</td>
-                                                    <td>{{ vaccinations[0].vaccinator }}</td>
+                                                    <td>{{ first_vaccination.vaccinator }}</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div> 
 
                             
 
                             
 
                             <!-- second vaccine -->
-                            <div class="col-md-5" v-if="user.first_vaccination == true">
+                            <div class="col-md-5" v-if="user.first_vaccination == 1">
                                 <div class="card">
                                     <div class="card-header bg-secondary text-light">
                                         Second Vaccinations
@@ -245,7 +245,8 @@ import axios from 'axios'
 
             const consultations = ref('')
 
-            const vaccinations = ref('')
+            const first_vaccination = ref('')
+            const second_vaccination = ref('')
             
             //mounted properti
             onMounted(() =>{
@@ -286,8 +287,9 @@ import axios from 'axios'
                 axios.get(`http://localhost:8000/api/v1/vaccination/${id_user}`).
                 then(response => {
 
-                    console.log(response.data)
-                    vaccinations.value = response.data
+                    console.log(response.data.data[0].user.name)
+                    first_vaccination.value = response.data.data[0].user
+                    second_vaccination.value = response.data.data[1]
 
                 }).catch(error=>{
                     console.log(error.response.data)
@@ -356,7 +358,8 @@ import axios from 'axios'
                 consultations,
                 addConsul,
                 addConsultation,
-                vaccinations
+                first_vaccination,
+                second_vaccination
             }
 
         }
